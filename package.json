@@ -9,11 +9,13 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lintfix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
+    "lintfix": "eslint --ext .js,.vue --ignore-path .gitignore . --fx"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "cookieparser": "^0.1.0",
     "dayjs": "^1.8.16",
+    "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
