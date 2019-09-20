@@ -2,20 +2,20 @@
   <div class="article-page">
     <div class="banner">
       <div class="container">
-        <h1>How to build webapps that scale</h1>
+        <h1>{{ article.title }}</h1>
 
         <div class="article-meta">
-          <a href=""><img src="http://i.imgur.com/Qr71crq.jpg"></a>
+          <a href=""><img :src="article.author.image"></a>
           <div class="info">
-            <a href="" class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
+            <a href="" class="author">{{ article.author.username }}</a>
+            <span class="date">{{ article.createdAt | fmtDate }}</span>
           </div>
           <button class="btn btn-sm btn-outline-secondary">
             <i class="ion-plus-round" />
             &nbsp;
             Follow Eric Simons <span class="counter">(10)</span>
           </button>
-        &nbsp;&nbsp;
+          &nbsp;&nbsp;
           <button class="btn btn-sm btn-outline-primary">
             <i class="ion-heart" />
             &nbsp;
@@ -27,15 +27,8 @@
 
     <div class="container page">
       <div class="row article-content">
-        <div class="col-md-12">
-          <p>
-            Web development technologies have evolved at an incredible clip over the past few years.
-          </p>
-          <h2 id="introducing-ionic">
-            Introducing RealWorld.
-          </h2>
-          <p>It's a great solution for learning how other frameworks work.</p>
-        </div>
+        <!-- eslint-disable-next-line -->
+        <div class="col-md-12" v-html="handleMarkdown(article.body)" />
       </div>
 
       <hr>
@@ -53,7 +46,7 @@
             &nbsp;
             Follow Eric Simons <span class="counter">(10)</span>
           </button>
-        &nbsp;
+          &nbsp;
           <button class="btn btn-sm btn-outline-primary">
             <i class="ion-heart" />
             &nbsp;
@@ -86,7 +79,7 @@
               <a href="" class="comment-author">
                 <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
               </a>
-            &nbsp;
+              &nbsp;
               <a href="" class="comment-author">Jacob Schmidt</a>
               <span class="date-posted">Dec 29th</span>
             </div>
@@ -102,7 +95,7 @@
               <a href="" class="comment-author">
                 <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
               </a>
-            &nbsp;
+              &nbsp;
               <a href="" class="comment-author">Jacob Schmidt</a>
               <span class="date-posted">Dec 29th</span>
               <span class="mod-options">
@@ -118,8 +111,30 @@
 </template>
 
 <script>
+import marked from 'marked'
 export default {
-
+  // 校验路由动态参数
+  // validate ({ params }) {
+  //   // 必须是number类型  如果不是数字的话会跳转到404，如果是数字的话会继续执行asyncData
+  //   return /^\d+$/.test(params.slug)
+  // },
+  async asyncData ({ $axios, route }) {
+    try {
+      const { article } = await $axios.$get(`/articles/${route.params.slug}`)
+      return {
+        article
+      }
+    } catch (err) {
+      return {
+        article: {}
+      }
+    }
+  },
+  methods: {
+    handleMarkdown (value) {
+      return marked(value)
+    }
+  }
 }
 </script>
 
