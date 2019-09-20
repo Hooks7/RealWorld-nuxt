@@ -7,21 +7,42 @@
         <ul class="nav navbar-nav pull-xs-right">
           <li class="nav-item">
             <!-- Add "active" class when you're on that page" -->
-            <a class="nav-link active" href="">Home</a>
+            <nuxt-link exact class="nav-link" to="/">
+              Home
+            </nuxt-link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-compose" />&nbsp;New Post
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-gear-a" />&nbsp;Settings
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Sign up</a>
-          </li>
+          <!-- 登录显示 -->
+          <!-- 登录显示 -->
+          <template v-if="$store.state.user">
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="/editor">
+                <i class="ion-compose" />&nbsp;New Post
+              </nuxt-link>
+            </li>
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="/settings">
+                <i class="ion-gear-a" />&nbsp;Settings
+              </nuxt-link>
+            </li>
+            <li class="nav-item">
+              <!-- <nuxt-link class="nav-link" :to="`/profile/${$store.state.user.username}`"> -->
+              <nuxt-link class="nav-link" :to="{ name: 'profile-username', params: { username: $store.state.user.username } }">
+                <i class="ion-gear-a" />&nbsp;{{ $store.state.user.username }}
+              </nuxt-link>
+            </li>
+          </template>
+          <template v-else>
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="/login">
+                Sign in
+              </nuxt-link>
+            </li>
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="/register">
+                Sign up
+              </nuxt-link>
+            </li>
+          </template>
         </ul>
       </div>
     </nav>

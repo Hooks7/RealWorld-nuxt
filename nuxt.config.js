@@ -52,6 +52,12 @@ export default {
   axios: {
     baseURL: 'https://conduit.productionready.io/api'
   },
+  router: {
+    // 配置导航菜单的激活样式
+    linkActiveClass: 'active'
+    // 精确的激活样式
+    // linkExactActiveClass: 'active'
+  },
   /*
   ** Build configuration
   */
