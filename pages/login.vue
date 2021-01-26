@@ -20,9 +20,9 @@
           <fieldset class="form-group">
             <input v-model="user.password" class="form-control form-control-lg" type="password" placeholder="Password">
           </fieldset>
-          <button class="btn btn-lg btn-primary pull-xs-right" @click="handleLogin">
+          <el-button @click="handleLogin" class="pull-xs-right">
             Sign in
-          </button>
+          </el-button>
         </div>
       </div>
     </div>

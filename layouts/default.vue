@@ -26,7 +26,13 @@
             </li>
             <li class="nav-item">
               <!-- <nuxt-link class="nav-link" :to="`/profile/${$store.state.user.username}`"> -->
-              <nuxt-link class="nav-link" :to="{ name: 'profile-username', params: { username: $store.state.user.username } }">
+              <nuxt-link
+                :to="{
+                  name: 'profile-username',
+                  params: { username: $store.state.user.username },
+                }"
+                class="nav-link"
+              >
                 <i class="ion-gear-a" />&nbsp;{{ $store.state.user.username }}
               </nuxt-link>
             </li>
@@ -51,7 +57,9 @@
       <div class="container">
         <a href="/" class="logo-font">conduit</a>
         <span class="attribution">
-          An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code &amp; design licensed under MIT.
+          An interactive learning project from
+          <a href="https://thinkster.io">Thinkster</a>. Code &amp; design
+          licensed under MIT.
         </span>
       </div>
     </footer>
@@ -59,5 +67,4 @@
 </template>
 
 <style>
-
 </style>
